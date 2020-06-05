@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-class Solution {
+class Level_Order {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         
         //Need the main ArrayList to hold the result as Expected
@@ -26,7 +26,7 @@ class Solution {
 
             
             int sizeOfQueue = treeTracking.size();
-            
+
             for(int i=0; i<sizeOfQueue; i++{
 
                 //Retreiving the head of the Queue to check for childs
