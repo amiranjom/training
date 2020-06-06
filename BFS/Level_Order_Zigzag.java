@@ -1,10 +1,21 @@
-import java.util.LinkedList;
-import java.util.Queue;
-
-
-class Level_Order {
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Level_Order_Zigzag {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+         
         //Need the main ArrayList to hold the result as Expected
         List<List<Integer>> result = new ArrayList<>();
         
@@ -18,6 +29,7 @@ class Level_Order {
         Queue<TreeNode> treeTracking = new LinkedList<>();
 
         treeTracking.add(root);
+        boolean leftToRight = true;
 
         while(!treeTracking.isEmpty()){
 
@@ -26,23 +38,38 @@ class Level_Order {
 
             
             int sizeOfQueue = treeTracking.size();
+            
+           
 
             for(int i=0; i<sizeOfQueue; i++){
 
                 //Retreiving the head of the Queue to check for childs
                 TreeNode tempTree = treeTracking.poll();
-                eachLevel.add(tempTree.val);
-
+                
+                if(leftToRight){
+                    
+                    eachLevel.add(tempTree.val);
+                }else{
+                    eachLevel.add(0,tempTree.val);
+                }
+                
+                
                 if(tempTree.left != null){
                     treeTracking.add(tempTree.left);
                 }
+                
+                
+                
                 if(tempTree.right != null){
                     treeTracking.add(tempTree.right);
                 }
-            } 
-            result.add(0,eachLevel);
+                
+            }
+            leftToRight = !leftToRight;
+            result.add(eachLevel);
         }
 
         return result;
     }
+    
 }
